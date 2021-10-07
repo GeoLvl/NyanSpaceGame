@@ -1,94 +1,91 @@
 * {
-    font-family: "Press Start 2P", cursive;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-  }
-  
-  #background { 
-      display: grid;
-    background-image: url("../imgs/spacebackground.png");
-    background-size: auto;  
-    width: 100%;
-    height: 100%;
-    margin: auto;
-  }
+  font-family: "Press Start 2P", cursive;
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 
-  .wrap {
-    vertical-align: top;
+#background {
+  display: grid;
+  background-image: url("../imgs/spacebackground.png");
+  background-size: auto;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.wrap {
+  vertical-align: top;
   width: 100%;
   height: 100%;
   display: none;
+}
 
-  }
-  
-  .player {
-    /* background-color: rgb(198, 127, 202); */
-    background-image: url("../imgs/nyanspace.png");
-    background-size: contain;  
-    width: 100px;
-    height: 50px;
-    position: absolute;
-    cursor: none;
-    display: none;
-  }
-  
-  .startpanel {    
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    left: 25%;
-    top: 25%;
-    z-index: 1;
-    border-radius: 2%;
-  } 
-  
-  
-  .startpanel button {
-    font-size: 880%;
-    color: rgb(255, 255, 255);
-    background-color: rgba(14, 31, 49, 0.70);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 2%;
-  }
-  
-  .startpanel button:hover {
-    font-size: 900%;
-    background-color: rgba(20, 39, 71, 0.5);
-    transition: all 0.05s ;
-  }
-  .score {
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    color: rgb(255, 255, 255);
-    left: 45%;
-    display: none;
-    z-index: 2;
-    overflow: hidden;
-  }
-  
-  .phase {
-    margin: 0;
-    position: absolute;
-    color: white;
-    left: 44%;
-    top: 3%;
-    font-size: 1.5em;
-    display: none;
-    z-index: 2;
-  }
-  
-  .asteroid {
-    background-image: url("../imgs/asteoids.png");
-    background-size: contain; 
-    background-repeat: no-repeat;
-    position: absolute;
-    border: solid brown 2px;
-    transition: all 0.2s linear;
-  }
+.player {
+  /* background-color: rgb(198, 127, 202); */
+  background-image: url("../imgs/nyanspace.png");
+  background-size: contain;
+  position: absolute;
+  cursor: none;
+  display: none;
+}
+
+.startpanel {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  z-index: 1;
+  border-radius: 2%;
+}
+
+.startpanel button {
+  font-size: 880%;
+  color: rgb(255, 255, 255);
+  background-color: rgba(14, 31, 49, 0.7);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 2%;
+}
+
+.startpanel button:hover {
+  font-size: 900%;
+  background-color: rgba(20, 39, 71, 0.5);
+  transition: all 0.05s;
+}
+.score {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  color: rgb(255, 255, 255);
+  left: 45%;
+  display: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.phase {
+  margin: 0;
+  position: absolute;
+  color: white;
+  left: 44%;
+  top: 3%;
+  font-size: 1.5em;
+  display: none;
+  z-index: 2;
+}
+
+.asteroid {
+  background-image: url("../imgs/asteoids.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  border: solid brown 2px;
+  /* transition: all 0.1s linear; */
+}

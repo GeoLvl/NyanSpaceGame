@@ -7,8 +7,20 @@ const phase = document.querySelector(".phase");
 // const phaseUp = document.querySelector("#phaseUp");
 const wrap = document.querySelector(".wrap");
 let number = 5;
+const playerWidth = 100; //px
+const playerHeight = 50; //px
 let playerX;
 let playerY;
+let currentTime = 0;
+
+let screenWidth =
+  window.innerWidth ||
+  document.documentElement.clientWidth ||
+  document.body.clientWidth;
+let screenHeight =
+  window.innerHeight ||
+  document.documentElement.clientHeight ||
+  document.body.clientHeight;
 
 //      START GAME
 
@@ -23,6 +35,9 @@ function startGame() {
   phase.style.display = "none;";
   score.style.display = "block";
   wrap.style.display = "block";
+
+  player.style.width = playerWidth + "px";
+  player.style.height = playerHeight + "px";
 
   //     MOUSE MOUVEMENT
   document.addEventListener("mousemove", (e) => {
@@ -54,14 +69,16 @@ function asteroid() {
   const obstacleArr = [];
 
   setInterval(() => {
-    const playerX = player.style.left;
-    const playerY = player.style.top;
-    const playerWidth = player.style.width;
-    const playerHeight = player.style.height;
+    const playerX = parseInt(player.style.left.replace("px", ""));
+    const playerY = parseInt(player.style.top.replace("px", ""));
 
-    const obstacle = new Obstacle();
-    obstacle.create();
-    obstacleArr.push(obstacle);
+    currentTime++;
+
+    if (currentTime % 12 === 0) {
+      const obstacle = new Obstacle();
+      obstacle.create();
+      obstacleArr.push(obstacle);
+    }
 
     obstacleArr.forEach((obstacle) => {
       obstacle.moveLeft();
@@ -73,9 +90,9 @@ function asteroid() {
     });
 
     obstacleArr.forEach((obstacle) => {
-      // console.log(x, y)
+      console.log(player.style);
+      console.log(playerX, playerY, playerWidth, playerHeight);
       console.log(obstacle);
-      // console.log(player);
 
       if (
         playerX < obstacle.x + obstacle.width &&
@@ -86,11 +103,18 @@ function asteroid() {
         alert("game over");
       }
 
+      //   if (obstacle.x < 50) {
+      //     if (playerX || playerY || playerWidth || playerHeight || obstacle) {
+      //       console.log(playerX, playerY, playerWidth, playerHeight);
+      //       console.log(obstacle);
+      //     }
+      //   }
+
       // if (x < obstacle.x + obstacle.width && x + obstacle.width > obstacle.x && y < obstacle.y + obstacle.height && player.height + y > obstacle.y){
       // alert('game over');
       // };
     });
-  }, 1000);
+  }, 20);
 }
 
 //     CLASS OBSTACLES
@@ -104,10 +128,10 @@ class Component {
     square.appendChild(this.domElm);
   }
   draw() {
-    this.domElm.style.width = this.width + "%";
-    this.domElm.style.height = this.height + "%";
-    this.domElm.style.left = this.x + "vw";
-    this.domElm.style.top = this.y + "vh";
+    this.domElm.style.width = this.width + "px";
+    this.domElm.style.height = this.height + "px";
+    this.domElm.style.left = this.x + "px";
+    this.domElm.style.top = this.y + "px";
   }
   remove() {
     square.removeChild(this.domElm);
@@ -117,13 +141,13 @@ class Component {
 class Obstacle extends Component {
   constructor() {
     super();
-    this.width = Math.floor(Math.random() * (5 - 2 + 1) + 5);
-    this.height = Math.floor(Math.random() * (5 - 2 + 1) + 5);
+    this.width = Math.floor(Math.random() * (100 - 2 + 1) + 50);
+    this.height = Math.floor(Math.random() * (100 - 2 + 1) + 50);
 
-    this.x = 105 - this.width;
-    this.y = Math.floor(Math.random() * (100 - this.height + 1));
+    this.x = screenWidth +10 ;
+    this.y = Math.floor(Math.random() * (screenHeight));
   }
   moveLeft() {
-    this.x -= 5;
+    this.x -= screenWidth / 95;
   }
 }
