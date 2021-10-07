@@ -13,6 +13,12 @@ let playerX;
 let playerY;
 let currentTime = 0;
 
+
+
+
+// const music = new sound("../sound/nyancat.mp3")
+
+
 let screenWidth =
   window.innerWidth ||
   document.documentElement.clientWidth ||
@@ -25,33 +31,43 @@ let screenHeight =
 //      START GAME
 
 function startGame() {
-  playerX = player.getBoundingClientRect().x;
-  playerY = player.getBoundingClientRect().y;
+    let gamePlaying = true;
 
-  //      DISPLAY MANIPULATION
-  console.log("start");
-  startPanel.style.display = "none";
-  player.style.display = "block";
-  phase.style.display = "none;";
-  score.style.display = "block";
-  wrap.style.display = "block";
+    
+        playerX = player.getBoundingClientRect().x;
+        playerY = player.getBoundingClientRect().y;
 
-  player.style.width = playerWidth + "px";
-  player.style.height = playerHeight + "px";
+        //      DISPLAY MANIPULATION
+        console.log("start");
+        startPanel.style.display = "none";
+        player.style.display = "block";
+        phase.style.display = "none;";
+        score.style.display = "block";
+        wrap.style.display = "block";
 
-  //     MOUSE MOUVEMENT
-  document.addEventListener("mousemove", (e) => {
-    let x = e.pageX;
-    let y = e.pageY;
-    player.style.left = x - 25 + "px";
-    player.style.top = y - 25 + "px";
-  });
+        //      MUSIC
+        //   music.play();
 
-  //     OBSTACLE
-  asteroid();
 
-  //     SCORE TIMER
-  timer();
+        player.style.width = playerWidth + "px";
+        player.style.height = playerHeight + "px";
+
+        //     MOUSE MOUVEMENT
+        document.addEventListener("mousemove", (e) => {
+            let x = e.pageX;
+            let y = e.pageY;
+            player.style.left = x - 25 + "px";
+            player.style.top = y - 25 + "px";
+        });
+
+    // while (gamePlaying === true){    
+
+        //     OBSTACLE
+        asteroid();
+
+        //     SCORE TIMER
+        timer();
+    // };
 }
 
 //     SCORE TIMER
@@ -72,9 +88,9 @@ function asteroid() {
     const playerX = parseInt(player.style.left.replace("px", ""));
     const playerY = parseInt(player.style.top.replace("px", ""));
 
-    currentTime++;
+    currentTime ++;
 
-    if (currentTime % 12 === 0) {
+    if (currentTime % 10 === 0) {
       const obstacle = new Obstacle();
       obstacle.create();
       obstacleArr.push(obstacle);
@@ -83,9 +99,9 @@ function asteroid() {
     obstacleArr.forEach((obstacle) => {
       obstacle.moveLeft();
       obstacle.draw();
-      if (obstacle.x === -10) {
-        // obstacle.remove();
-        // obstacle.shift();
+      if (obstacle.x === -5) {
+        obstacle.remove();
+        obstacle.shift();
       }
     });
 
@@ -100,21 +116,11 @@ function asteroid() {
         playerY < obstacle.y + obstacle.height &&
         playerY + playerHeight > obstacle.y
       ) {
-        alert("game over");
+        // gamePlaying = false;
+        alert('noob')
       }
-
-      //   if (obstacle.x < 50) {
-      //     if (playerX || playerY || playerWidth || playerHeight || obstacle) {
-      //       console.log(playerX, playerY, playerWidth, playerHeight);
-      //       console.log(obstacle);
-      //     }
-      //   }
-
-      // if (x < obstacle.x + obstacle.width && x + obstacle.width > obstacle.x && y < obstacle.y + obstacle.height && player.height + y > obstacle.y){
-      // alert('game over');
-      // };
     });
-  }, 20);
+  }, 15);
 }
 
 //     CLASS OBSTACLES
@@ -142,10 +148,10 @@ class Obstacle extends Component {
   constructor() {
     super();
     this.width = Math.floor(Math.random() * (100 - 2 + 1) + 50);
-    this.height = Math.floor(Math.random() * (100 - 2 + 1) + 50);
+    this.height = Math.floor(Math.random() * (50 - 2 + 1) + 50);
 
-    this.x = screenWidth +10 ;
-    this.y = Math.floor(Math.random() * (screenHeight));
+    this.x = screenWidth + 10;
+    this.y = Math.floor(Math.random() * screenHeight);
   }
   moveLeft() {
     this.x -= screenWidth / 95;
