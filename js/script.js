@@ -6,7 +6,9 @@ const scoreUp = document.querySelector("#scoreUp");
 const phase = document.querySelector(".phase");
 // const phaseUp = document.querySelector("#phaseUp");
 const wrap = document.querySelector(".wrap");
-let number = 5;
+
+const stopPanel = document.querySelector(".stoppanel")
+
 const playerWidth = 100; //px
 const playerHeight = 50; //px
 let playerX;
@@ -75,10 +77,10 @@ const timer = function scoreUpdate() {
 
 //     OBSTACLE
 function asteroid() {
-  console.log();
+  // console.log();
   const obstacleArr = [];
 
-  setInterval(() => {
+  const gamePlaying = setInterval(() => {
     const playerX = parseInt(player.style.left.replace("px", ""));
     const playerY = parseInt(player.style.top.replace("px", ""));
 
@@ -93,16 +95,18 @@ function asteroid() {
     obstacleArr.forEach((obstacle) => {
       obstacle.moveLeft();
       obstacle.draw();
-      if (obstacle.x === -5) {
-        obstacle.remove();
-        obstacle.shift();
+      if (obstacle.y === 0) {
+        console.log("remove")
+        // obstacle.shift();
+        // obstacle.remove();
+        
       }
     });
 
     obstacleArr.forEach((obstacle) => {
-      console.log(player.style);
-      console.log(playerX, playerY, playerWidth, playerHeight);
-      console.log(obstacle);
+      // console.log(player.style);
+      // console.log(playerX, playerY, playerWidth, playerHeight);
+      // console.log(obstacle);
 
       if (
         playerX < obstacle.x + obstacle.width &&
@@ -111,11 +115,18 @@ function asteroid() {
         playerY + playerHeight > obstacle.y
       ) {
         // gamePlaying = false;
-        alert("Game Over");
-        // console.log("game over")
+        // alert("Game Over");
+        console.log("game over")
+        clearInterval(gamePlaying)
+        scoreUp.innerHTML = "GAME OVER !";
+        stopPanel.style.display = "block";
       }
     });
   }, 15);
+}
+
+function restart(){
+  document.location.reload()
 }
 
 //     CLASS OBSTACLES
