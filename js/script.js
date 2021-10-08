@@ -15,7 +15,7 @@ let playerX;
 let playerY;
 let currentTime = 0;
 
-// const music = new sound("../sound/nyancat.mp3")
+
 
 let screenWidth =
   window.innerWidth ||
@@ -64,6 +64,8 @@ function startGame() {
   //     SCORE TIMER
   timer();
   // };
+  play();
+
 }
 
 //     SCORE TIMER
@@ -95,7 +97,7 @@ function asteroid() {
     obstacleArr.forEach((obstacle) => {
       obstacle.moveLeft();
       obstacle.draw();
-      if (obstacle.y === 0) {
+      if (obstacle.y == 0) {
         console.log("remove")
         // obstacle.shift();
         // obstacle.remove();
@@ -114,15 +116,16 @@ function asteroid() {
         playerY < obstacle.y + obstacle.height &&
         playerY + playerHeight > obstacle.y
       ) {
-        // gamePlaying = false;
-        // alert("Game Over");
-        console.log("game over")
         clearInterval(gamePlaying)
-        scoreUp.innerHTML = "GAME OVER !";
         stopPanel.style.display = "block";
       }
     });
   }, 15);
+}
+
+function play() {
+  let audio = document.getElementById("audio");
+  audio.play();
 }
 
 function restart(){
