@@ -13,11 +13,7 @@ let playerX;
 let playerY;
 let currentTime = 0;
 
-
-
-
 // const music = new sound("../sound/nyancat.mp3")
-
 
 let screenWidth =
   window.innerWidth ||
@@ -31,43 +27,41 @@ let screenHeight =
 //      START GAME
 
 function startGame() {
-    let gamePlaying = true;
+  let gamePlaying = true;
 
-    
-        playerX = player.getBoundingClientRect().x;
-        playerY = player.getBoundingClientRect().y;
+  playerX = player.getBoundingClientRect().x;
+  playerY = player.getBoundingClientRect().y;
 
-        //      DISPLAY MANIPULATION
-        console.log("start");
-        startPanel.style.display = "none";
-        player.style.display = "block";
-        phase.style.display = "none;";
-        score.style.display = "block";
-        wrap.style.display = "block";
+  //      DISPLAY MANIPULATION
+  console.log("start");
+  startPanel.style.display = "none";
+  player.style.display = "block";
+  phase.style.display = "none;";
+  score.style.display = "block";
+  wrap.style.display = "block";
 
-        //      MUSIC
-        //   music.play();
+  //      MUSIC
+  //   music.play();
 
+  player.style.width = playerWidth + "px";
+  player.style.height = playerHeight + "px";
 
-        player.style.width = playerWidth + "px";
-        player.style.height = playerHeight + "px";
+  //     MOUSE MOUVEMENT
+  document.addEventListener("mousemove", (e) => {
+    let x = e.pageX;
+    let y = e.pageY;
+    player.style.left = x - 25 + "px";
+    player.style.top = y - 25 + "px";
+  });
 
-        //     MOUSE MOUVEMENT
-        document.addEventListener("mousemove", (e) => {
-            let x = e.pageX;
-            let y = e.pageY;
-            player.style.left = x - 25 + "px";
-            player.style.top = y - 25 + "px";
-        });
+  // while (gamePlaying === true){
 
-    // while (gamePlaying === true){    
+  //     OBSTACLE
+  asteroid();
 
-        //     OBSTACLE
-        asteroid();
-
-        //     SCORE TIMER
-        timer();
-    // };
+  //     SCORE TIMER
+  timer();
+  // };
 }
 
 //     SCORE TIMER
@@ -88,7 +82,7 @@ function asteroid() {
     const playerX = parseInt(player.style.left.replace("px", ""));
     const playerY = parseInt(player.style.top.replace("px", ""));
 
-    currentTime ++;
+    currentTime++;
 
     if (currentTime % 10 === 0) {
       const obstacle = new Obstacle();
@@ -117,7 +111,8 @@ function asteroid() {
         playerY + playerHeight > obstacle.y
       ) {
         // gamePlaying = false;
-        alert('noob')
+        alert("Game Over");
+        // console.log("game over")
       }
     });
   }, 15);
@@ -148,7 +143,7 @@ class Obstacle extends Component {
   constructor() {
     super();
     this.width = Math.floor(Math.random() * (100 - 2 + 1) + 50);
-    this.height = Math.floor(Math.random() * (50 - 2 + 1) + 50);
+    this.height = this.width;
 
     this.x = screenWidth + 10;
     this.y = Math.floor(Math.random() * screenHeight);
