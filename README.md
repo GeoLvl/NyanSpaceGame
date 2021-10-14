@@ -1,14 +1,14 @@
 # NyanSpaceGame
 
-##Intro
+## Intro
 
 Basic space obstacles game because obstacles games are fun and easy to play
 
-##Language
+## Language
 
 Using only html, css and vanilla Javascript
 
-##Demo
+# #Demo
 
 You can try this game by clicking this link below !
 
